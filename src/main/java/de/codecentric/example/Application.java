@@ -15,26 +15,33 @@
  */
 package de.codecentric.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class Application {
+public class Application implements CommandLineRunner {
+
+    @Autowired
+    TypeSafeConfiguration typeSafeConfiguration;
+
+    @Autowired
+    AnnotationConfiguration annotationConfiguration;
 
     public static void main(String[] args) {
-        final ApplicationContext ctx = SpringApplication.run(Application.class);
-
-        final TypeSafeConfiguration typeSafeConfiguration = ctx.getBean(TypeSafeConfiguration.class);
-        final AnnotationConfiguration annotationConfiguration = ctx.getBean(AnnotationConfiguration.class);
-
-        info("Application initialized with the following configuration:");
-        info(typeSafeConfiguration.toString());
-        info(annotationConfiguration.toString());
-        System.out.println();
+       SpringApplication.run(Application.class,args);
     }
 
     private static void info(String text) {
         System.out.println(String.format("Application.java: %s", text));
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        info("Applicaion properies are as below:");
+        info(typeSafeConfiguration.toString());
+        info(annotationConfiguration.toString());
     }
 }

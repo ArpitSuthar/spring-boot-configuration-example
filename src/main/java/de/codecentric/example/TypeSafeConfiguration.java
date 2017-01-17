@@ -16,49 +16,38 @@
 package de.codecentric.example;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "example")
+@ConfigurationProperties
 public class TypeSafeConfiguration {
 
-    private String propertyName;
+    private String name;
 
-    private String propertyname;
-    
-    private String property_name;
+    private int age;
 
-    public String getPropertyName() {
-        return propertyName;
+    public String getName() {
+        return name;
     }
 
-    public void setPropertyName(final String propertyName) {
-        this.propertyName = propertyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPropertyname() {
-        return propertyname;
+    public int getAge() {
+        return age;
     }
 
-    public void setPropertyname(final String propertyname) {
-        this.propertyname = propertyname;
-    }
-
-    public String getProperty_name() {
-        return property_name;
-    }
-
-    public void setProperty_name(final String property_name) {
-        this.property_name = property_name;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TypeSafeConfiguration{");
-        sb.append("propertyName='").append(propertyName).append('\'');
-        sb.append(", propertyname='").append(propertyname).append('\'');
-        sb.append(", property_name='").append(property_name).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "TypeSafeConfiguration{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
